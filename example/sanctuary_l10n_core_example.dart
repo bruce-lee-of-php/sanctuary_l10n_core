@@ -3,58 +3,66 @@
 // and execute: dart example/example.dart
 
 import 'package:sanctuary_l10n_core/sanctuary_l10n_core.dart';
-import 'package:sanctuary_l10n_core/src/grammar_engine.dart';
-
-// A simple User class to demonstrate storing a grammatical gender.
-class User {
-  final String name;
-  final GrammaticalGender gender;
-
-  User(this.name, this.gender);
-
-  @override
-  String toString() {
-    // .name is the enum value's name, e.g., "feminine"
-    return '$name (Gender: ${gender.name})';
-  }
-}
-
-/// A function showing how the real grammar engine is used.
-String getWelcomeMessage(String locale, User user) {
-  // Call the real grammar engine from the package.
-  final welcomeAdjective = SanctuaryL10n.getAdjective(
-    locale: locale,
-    gender: user.gender,
-    baseAdjective: 'welcome',
-  );
-  return '¡$welcomeAdjective, ${user.name}!';
-}
+import 'package:sanctuary_l10n_core/src/vocabulary.dart';
 
 void main() {
   print('--- Sanctuary L10n Core Example ---');
 
-  // Create some example users with different grammatical genders.
-  final user1 = User('Alex', GrammaticalGender.neutral);
-  final user2 = User('Bea', GrammaticalGender.feminine);
-  final user3 = User('Carlos', GrammaticalGender.masculine);
+  // Create an instance of the vocabulary accessor.
+  final vocabulary = SanctuaryVocabulary();
 
-  print('\nOur Users:');
-  print(user1);
-  print(user2);
-  print(user3);
+  // --- Vocabulary Showcase ---
+  // This section demonstrates how to access the complete, curated lists
+  // of terminology included in the package.
 
-  print('\n--- Grammar Engine Showcase ---');
+  print('\n--- Complete Vocabulary Lists ---');
+
+  print('\nAvailable Pronoun Sets:');
+  // Use the accessor to get all pronoun sets and print their properties.
+  for (final pronounSet in vocabulary.pronouns.all()) {
+    print(
+        '- ${pronounSet.toString()} (Subjective: ${pronounSet.subjective}, Objective: ${pronounSet.objective}, Reflexive: ${pronounSet.reflexive})');
+  }
+
+  print('\nAvailable Gender Identities:');
+  for (final identity in vocabulary.genders.all()) {
+    print('- $identity');
+  }
+
+  print('\nAvailable Sexualities:');
+  for (final sexuality in vocabulary.sexualities.all()) {
+    print('- $sexuality');
+  }
+
+  // --- Random Data Generation Showcase ---
+  // This section demonstrates the utility functions for generating
+  // random data, useful for testing, previews, or mockups.
+
+  print('\n--- Random Data Generation ---');
+  print('Generating some random identities for a user profile:');
+
+  final randomPronoun = vocabulary.randomPronounSet();
+  final randomGender = vocabulary.randomGender();
+  final randomSexuality = vocabulary.randomSexuality();
+
+  print('- Pronouns: ${randomPronoun.toString()}');
+  print('- Gender Identity: $randomGender');
+  print('- Sexuality: $randomSexuality');
+
+  print('\n--- Grammar Engine Showcase (Future) ---');
+  print(
+      'The following demonstrates how the upcoming Grammar Engine will be used.');
 
   final locale = 'es'; // Pretend our app is in Spanish
-  print('Generating messages for locale: $locale\n');
+  final userGender = GrammaticalGender.feminine;
 
-  // The grammar engine uses the user's gender to create
+  // The grammar engine will use the user's gender to create
   // grammatically correct sentences.
-  final messageForAlex = getWelcomeMessage(locale, user1);
-  final messageForBea = getWelcomeMessage(locale, user2);
-  final messageForCarlos = getWelcomeMessage(locale, user3);
-
-  print(messageForAlex);
-  print(messageForBea);
-  print(messageForCarlos);
+  final welcomeAdjective = SanctuaryL10n.getAdjective(
+    locale: locale,
+    gender: userGender,
+    baseAdjective: 'welcome',
+  );
+  print(
+      'Example Usage: ¡$welcomeAdjective, user!'); // Expected: ¡Bienvenida, user!
 }
