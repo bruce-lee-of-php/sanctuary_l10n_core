@@ -1,0 +1,19 @@
+{
+  "@@locale": "es",
+  "identity_nonBinary": "No binarie",
+  "@identity_nonBinary": {
+    "description": "Un término paraguas para identidades de género que no son únicamente masculinas o femeninas."
+  },
+  "identity_genderfluid": "Género fluido",
+  "@identity_genderfluid": {
+    "description": "Una identidad de género que varía con el tiempo."
+  },
+  "identity_transgender": "Transgénero",
+  "@identity_transgender": {
+    "description": "Un término paraguas para personas cuya identidad de género difiere del sexo que se les asignó al nacer."
+  },
+  "relationship_partner": "Pareja",
+  "@relationship_partner": {
+    "description": "Un término de género neutro para una pareja."
+  }
+}

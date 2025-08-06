@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "identity_nonBinary": "Non-binary",
+  "@identity_nonBinary": {
+    "description": "An umbrella term for gender identities that are not solely male or female."
+  },
+  "identity_genderfluid": "Genderfluid",
+  "@identity_genderfluid": {
+    "description": "A gender identity which varies over time."
+  },
+  "identity_transgender": "Transgender",
+  "@identity_transgender": {
+    "description": "An umbrella term for people whose gender identity differs from the sex they were assigned at birth."
+  },
+  "relationship_partner": "Partner",
+  "@relationship_partner": {
+    "description": "A gender-neutral term for a significant other."
+  }
+}

@@ -1,0 +1,22 @@
+# The package manifest. Defines the package's name, version,
+# dependencies, and other essential metadata for publishing to pub.dev.
+
+name: sanctuary_l10n_core
+description: A pure Dart localization toolkit for queer and trans communities, providing a community-vetted glossary and tools for handling grammatical gender to make inclusive language the default.
+version: 0.1.0
+homepage: https://github.com/your_username/sanctuary_l10n_core # TODO: Replace with your actual GitHub repo URL
+repository: https://github.com/your_username/sanctuary_l10n_core # TODO: Replace with your actual GitHub repo URL
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+# This package has no Flutter dependencies, making it a pure Dart package.
+dependencies:
+  intl: ^0.18.0 # Standard dependency for localization tooling
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^2.0.0
+
+# Note: For future versions, we will add build_runner here to automate
+# the merging of the glossary files.

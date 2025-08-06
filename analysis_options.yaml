@@ -1,0 +1,10 @@
+# This file configures the Dart static analysis tool.
+# Using the recommended 'lints' package ensures high-quality, idiomatic Dart code.
+
+include: package:lints/recommended.yaml
+
+linter:
+  rules:
+    # You can customize linting rules here if needed.
+    # For example:
+    # prefer_single_quotes: true
