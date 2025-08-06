@@ -3,7 +3,7 @@
 
 name: sanctuary_l10n_core
 description: A pure Dart localization toolkit for queer and trans communities, providing a community-vetted glossary and tools for handling grammatical gender to make inclusive language the default.
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/bruce-lee-of-php/sanctuary_l10n_core # TODO: Replace with your actual GitHub repo URL
 repository: https://github.com/bruce-lee-of-php/sanctuary_l10n_core # TODO: Replace with your actual GitHub repo URL
 
