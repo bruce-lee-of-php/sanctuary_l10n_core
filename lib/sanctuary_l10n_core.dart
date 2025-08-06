@@ -7,6 +7,4 @@ library sanctuary_l10n_core;
 
 // Export the public-facing models of the package.
 export 'src/models/grammatical_gender.dart';
-
-// In future versions, we will also export the Grammar Engine class here.
-// export 'src/grammar_engine.dart';
+export 'src/grammar_engine.dart';
