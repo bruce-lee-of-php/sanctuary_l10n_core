@@ -12,11 +12,11 @@ environment:
 
 # This package has no Flutter dependencies, making it a pure Dart package.
 dependencies:
-  intl: ^0.18.0 # Standard dependency for localization tooling
+  intl: ^0.20.2 # Standard dependency for localization tooling
 
 dev_dependencies:
   test: ^1.24.0
-  lints: ^2.0.0
+  lints: ^6.0.0
 
 # Note: For future versions, we will add build_runner here to automate
 # the merging of the glossary files.
