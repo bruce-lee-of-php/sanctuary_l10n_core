@@ -1,0 +1,9 @@
+# example/build.yaml
+
+targets:
+  $default:
+    builders:
+      # This line explicitly tells the build runner to ONLY run
+      # the arb_merger builder from your core package.
+      sanctuary_l10n_core|arb_merger:
+        enabled: true

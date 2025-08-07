@@ -1,0 +1,18 @@
+# This file configures the build_runner. It tells the build system
+# about our custom builder and what files it should run on.
+
+targets:
+  $default:
+    builders:
+      sanctuary_l10n_core|arb_merger:
+        enabled: true
+
+builders:
+  arb_merger:
+    import: "package:sanctuary_l10n_core/src/build/arb_merger_builder.dart"
+    builder_factories: ["arbMergerBuilder"]
+    build_extensions: {".arb": [".temp.arb"]}
+    # This setting allows other packages that depend on this one
+    # to use our builder.
+    auto_apply: dependents
+    build_to: cache

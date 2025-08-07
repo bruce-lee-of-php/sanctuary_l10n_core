@@ -1,0 +1,4 @@
+# This tells the gen-l10n tool to look for its input files in the directory
+# where our build_runner script places its output.
+arb-dir: .dart_tool/build/generated/sanctuary_l10n_core_example/lib/l10n
+template-arb-file: app_en.merged.arb
