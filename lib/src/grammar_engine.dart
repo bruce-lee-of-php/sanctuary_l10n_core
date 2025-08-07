@@ -1,13 +1,14 @@
-// This file has been updated to handle plurals. The `format` function
-// now accepts a `number` parameter.
+// The grammar engine's `format` function has been upgraded to be smarter.
+// It can now infer the grammatical gender from the provided `PronounSet`.
 
+import 'package:sanctuary_l10n_core/src/grammar_rules/english_verbs.dart';
 import 'package:sanctuary_l10n_core/src/grammar_rules/spanish_rules.dart';
 import 'package:sanctuary_l10n_core/src/models/grammatical_gender.dart';
 import 'package:sanctuary_l10n_core/src/models/grammatical_number.dart';
+import 'package:sanctuary_l10n_core/src/models/pronoun_set.dart';
 
-/// A static helper class for handling grammatical gender in localization.
 class SanctuaryL10n {
-  // --- Rule Set Definitions ---
+  // --- Rule Set Definitions (Unchanged) ---
   static final Map<String, Map<String, InflectionMap>> _adjectiveRuleSets = {
     'es': spanishAdjectives
   };
@@ -20,16 +21,21 @@ class SanctuaryL10n {
   static final Map<String, InflectionMap> _indefiniteArticleRuleSets = {
     'es': spanishIndefiniteArticles
   };
+  static final Map<String, Map<String, Map<String, Map<String, String>>>>
+      _verbRuleSets = {'en': englishVerbs};
 
-  // --- NEW: The Intelligent Formatter ---
+  // --- The Intelligent Formatter ---
   static String format(
     String template, {
     required String locale,
-    required GrammaticalGender gender,
-    GrammaticalNumber number =
-        GrammaticalNumber.singular, // Default to singular
+    GrammaticalGender? gender,
+    GrammaticalNumber number = GrammaticalNumber.singular,
+    PronounSet? pronoun,
   }) {
     final RegExp placeholderRegex = RegExp(r'\{(.+?)\}');
+
+    // NEW LOGIC: Infer the gender from the pronoun if it's not explicitly provided.
+    final GrammaticalGender? currentGender = gender ?? pronoun?.defaultGender;
 
     return template.replaceAllMapped(placeholderRegex, (match) {
       final placeholder = match.group(1) ?? '';
@@ -39,30 +45,46 @@ class SanctuaryL10n {
 
       switch (type) {
         case 'noun':
-          return getNoun(
-              locale: locale,
-              gender: gender,
-              number: number,
-              baseNoun: baseWord);
         case 'adj':
-          return getAdjective(
-              locale: locale,
-              gender: gender,
-              number: number,
-              baseAdjective: baseWord);
         case 'def_article':
-          return getDefiniteArticle(
-              locale: locale, gender: gender, number: number);
         case 'indef_article':
-          return getIndefiniteArticle(
-              locale: locale, gender: gender, number: number);
+          if (currentGender == null)
+            return baseWord; // Cannot inflect without a gender
+          if (type == 'noun')
+            return getNoun(
+                locale: locale,
+                gender: currentGender,
+                number: number,
+                baseNoun: baseWord);
+          if (type == 'adj')
+            return getAdjective(
+                locale: locale,
+                gender: currentGender,
+                number: number,
+                baseAdjective: baseWord);
+          if (type == 'def_article')
+            return getDefiniteArticle(
+                locale: locale, gender: currentGender, number: number);
+          if (type == 'indef_article')
+            return getIndefiniteArticle(
+                locale: locale, gender: currentGender, number: number);
+          break;
+        case 'verb':
+          if (pronoun == null)
+            return baseWord; // Cannot conjugate without a pronoun
+          return getVerb(
+              locale: locale,
+              pronoun: pronoun,
+              baseVerb: parts[1],
+              tense: parts[2]);
         default:
           return match.group(0) ?? '';
       }
+      return match.group(0) ?? '';
     });
   }
 
-  // --- Existing Functions (now with `number` parameter) ---
+  // --- Public API Functions (Unchanged) ---
   static String getAdjective(
       {required String locale,
       required GrammaticalGender gender,
@@ -109,13 +131,26 @@ class SanctuaryL10n {
         fallback: 'a');
   }
 
-  // --- Private Helper Methods (now with `number` parameter) ---
-  static String _getInflectedWord({
-    required Map<String, InflectionMap>? ruleSet,
-    required String baseWord,
-    required GrammaticalGender gender,
-    required GrammaticalNumber number,
-  }) {
+  static String getVerb(
+      {required String locale,
+      required PronounSet pronoun,
+      required String baseVerb,
+      required String tense}) {
+    final langRules = _verbRuleSets[locale];
+    if (langRules == null) return baseVerb;
+    final verbForms = langRules[baseVerb];
+    if (verbForms == null) return baseVerb;
+    final tenseForms = verbForms[tense];
+    if (tenseForms == null) return baseVerb;
+    return tenseForms[pronoun.conjugationKey] ?? baseVerb;
+  }
+
+  // --- Private Helper Methods (Unchanged) ---
+  static String _getInflectedWord(
+      {required Map<String, InflectionMap>? ruleSet,
+      required String baseWord,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number}) {
     if (ruleSet == null) return baseWord;
     final numberForms = ruleSet[baseWord];
     if (numberForms == null) return baseWord;
@@ -124,12 +159,11 @@ class SanctuaryL10n {
     return genderForms[gender] ?? baseWord;
   }
 
-  static String _getArticle({
-    required Map<GrammaticalNumber, Map<GrammaticalGender, String>>? ruleSet,
-    required GrammaticalGender gender,
-    required GrammaticalNumber number,
-    required String fallback,
-  }) {
+  static String _getArticle(
+      {required Map<GrammaticalNumber, Map<GrammaticalGender, String>>? ruleSet,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number,
+      required String fallback}) {
     if (ruleSet == null) return fallback;
     final genderForms = ruleSet[number];
     if (genderForms == null) return fallback;

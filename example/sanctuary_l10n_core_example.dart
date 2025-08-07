@@ -23,6 +23,7 @@ void main() {
   print('\n\n--- 1. Vocabulary Showcase ---');
 
   print('\nAvailable Pronoun Sets (as structured objects):');
+  // Use the accessor to get all pronoun sets and print their properties.
   for (final pronounSet in vocabulary.pronouns.all()) {
     print(
         '- ${pronounSet.toString().padRight(8)} (Reflexive: ${pronounSet.reflexive})');

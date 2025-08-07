@@ -1,17 +1,38 @@
-// This file contains the raw, community-vetted data for the package.
-// It is stored directly in Dart to be easily accessible in any environment.
+// This file has been updated to include the new `defaultGender` property
+// for each pronoun, making the grammar engine smarter.
 
+import '../models/grammatical_gender.dart';
 import '../models/pronoun_set.dart';
 
 // --- PRONOUNS ---
 
 const List<PronounSet> allPronouns = [
   PronounSet(
+    subjective: 'I',
+    objective: 'me',
+    possessiveAdjective: 'my',
+    possessivePronoun: 'mine',
+    reflexive: 'myself',
+    conjugationKey: '1st-person-singular',
+    defaultGender: GrammaticalGender.neutral, // "I" doesn't imply gender
+  ),
+  PronounSet(
+    subjective: 'you',
+    objective: 'you',
+    possessiveAdjective: 'your',
+    possessivePronoun: 'yours',
+    reflexive: 'yourself',
+    conjugationKey: 'plural',
+    defaultGender: GrammaticalGender.neutral,
+  ),
+  PronounSet(
     subjective: 'she',
     objective: 'her',
     possessiveAdjective: 'her',
     possessivePronoun: 'hers',
     reflexive: 'herself',
+    conjugationKey: '3rd-person-singular',
+    defaultGender: GrammaticalGender.feminine, // "she" implies feminine
   ),
   PronounSet(
     subjective: 'he',
@@ -19,6 +40,8 @@ const List<PronounSet> allPronouns = [
     possessiveAdjective: 'his',
     possessivePronoun: 'his',
     reflexive: 'himself',
+    conjugationKey: '3rd-person-singular',
+    defaultGender: GrammaticalGender.masculine, // "he" implies masculine
   ),
   PronounSet(
     subjective: 'they',
@@ -26,6 +49,17 @@ const List<PronounSet> allPronouns = [
     possessiveAdjective: 'their',
     possessivePronoun: 'theirs',
     reflexive: 'themself',
+    conjugationKey: '3rd-person-plural',
+    defaultGender: GrammaticalGender.neutral, // "they" implies neutral
+  ),
+  PronounSet(
+    subjective: 'we',
+    objective: 'us',
+    possessiveAdjective: 'our',
+    possessivePronoun: 'ours',
+    reflexive: 'ourselves',
+    conjugationKey: 'plural',
+    defaultGender: GrammaticalGender.neutral,
   ),
   PronounSet(
     subjective: 'ze',
@@ -33,12 +67,12 @@ const List<PronounSet> allPronouns = [
     possessiveAdjective: 'hir',
     possessivePronoun: 'hirs',
     reflexive: 'hirself',
+    conjugationKey: '3rd-person-singular',
+    defaultGender: GrammaticalGender.neutral,
   ),
-  // More neopronouns can be added here.
 ];
 
-// --- GENDER IDENTITIES ---
-
+// --- GENDER IDENTITIES (Unchanged) ---
 const List<String> allGenderIdentities = [
   'Trans Woman',
   'Trans Man',
@@ -47,11 +81,9 @@ const List<String> allGenderIdentities = [
   'Agender',
   'Cis Woman',
   'Cis Man',
-  // More identities can be added here.
 ];
 
-// --- SEXUALITIES ---
-
+// --- SEXUALITIES (Unchanged) ---
 const List<String> allSexualities = [
   'Lesbian',
   'Gay',
@@ -60,5 +92,4 @@ const List<String> allSexualities = [
   'Asexual',
   'Queer',
   'Straight',
-  // More orientations can be added here.
 ];
