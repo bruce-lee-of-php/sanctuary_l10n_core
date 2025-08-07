@@ -20,7 +20,7 @@
  * Added `getNoun()`, `getDefiniteArticle()`, and `getIndefiniteArticle()` functions.
  * Expanded the Spanish rule set to include nouns and articles.
 
-# 0.3.3
+# 0.3.1
 
 * **Major Feature: Intelligent String Formatter**
     * Added the `SanctuaryL10n.format()` function to generate grammatically correct sentences from a template string.
