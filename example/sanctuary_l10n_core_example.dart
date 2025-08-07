@@ -1,45 +1,44 @@
-// This is an example of how to use the sanctuary_l10n_core package.
-// To run this file, navigate to your package's root directory in the terminal
-// and execute: dart example/example.dart
+// This example file provides a comprehensive demonstration of all features
+// available in the sanctuary_l10n_core package.
 
 import 'package:sanctuary_l10n_core/sanctuary_l10n_core.dart';
-import 'package:sanctuary_l10n_core/src/vocabulary.dart';
+
+// A simple User class to demonstrate storing a grammatical gender.
+class User {
+  final String name;
+  final GrammaticalGender gender;
+  User(this.name, this.gender);
+}
 
 void main() {
-  print('--- Sanctuary L10n Core Example ---');
+  print('--- Sanctuary L10n Core: Comprehensive Example ---');
 
-  // Create an instance of the vocabulary accessor.
+  // Create an instance of the vocabulary accessor. This is the main entry point
+  // for accessing the package's curated lists of terminology.
   final vocabulary = SanctuaryVocabulary();
 
-  // --- Vocabulary Showcase ---
+  // --- 1. Vocabulary Showcase ---
   // This section demonstrates how to access the complete, curated lists
   // of terminology included in the package.
+  print('\n\n--- 1. Vocabulary Showcase ---');
 
-  print('\n--- Complete Vocabulary Lists ---');
-
-  print('\nAvailable Pronoun Sets:');
-  // Use the accessor to get all pronoun sets and print their properties.
+  print('\nAvailable Pronoun Sets (as structured objects):');
   for (final pronounSet in vocabulary.pronouns.all()) {
     print(
-        '- ${pronounSet.toString()} (Subjective: ${pronounSet.subjective}, Objective: ${pronounSet.objective}, Reflexive: ${pronounSet.reflexive})');
+        '- ${pronounSet.toString().padRight(8)} (Reflexive: ${pronounSet.reflexive})');
   }
 
   print('\nAvailable Gender Identities:');
-  for (final identity in vocabulary.genders.all()) {
-    print('- $identity');
-  }
+  print(vocabulary.genders.all().join(', '));
 
   print('\nAvailable Sexualities:');
-  for (final sexuality in vocabulary.sexualities.all()) {
-    print('- $sexuality');
-  }
+  print(vocabulary.sexualities.all().join(', '));
 
-  // --- Random Data Generation Showcase ---
+  // --- 2. Random Data Generation Showcase ---
   // This section demonstrates the utility functions for generating
-  // random data, useful for testing, previews, or mockups.
-
-  print('\n--- Random Data Generation ---');
-  print('Generating some random identities for a user profile:');
+  // random data, which is incredibly useful for testing, previews, or mockups.
+  print('\n\n--- 2. Random Data Generation ---');
+  print('Generating a random user profile:');
 
   final randomPronoun = vocabulary.randomPronounSet();
   final randomGender = vocabulary.randomGender();
@@ -49,20 +48,71 @@ void main() {
   print('- Gender Identity: $randomGender');
   print('- Sexuality: $randomSexuality');
 
-  print('\n--- Grammar Engine Showcase (Future) ---');
-  print(
-      'The following demonstrates how the upcoming Grammar Engine will be used.');
+  // --- 3. Grammar Engine Showcase ---
+  // This section demonstrates the core power of the package: the ability to
+  // create grammatically correct, gender-affirming sentences.
+  print('\n\n--- 3. Grammar Engine Showcase ---');
+  final locale = 'es'; // We'll use Spanish for our examples.
+  print('Locale: $locale');
 
-  final locale = 'es'; // Pretend our app is in Spanish
-  final userGender = GrammaticalGender.feminine;
+  // --- Singular Examples ---
+  print('\n--- Singular Examples ---');
+  final singularTemplate = '{def_article} {noun:friend} está {adj:tired}.';
+  print('Template: "$singularTemplate"');
 
-  // The grammar engine will use the user's gender to create
-  // grammatically correct sentences.
-  final welcomeAdjective = SanctuaryL10n.getAdjective(
+  final userBea = User('Bea', GrammaticalGender.feminine);
+  final sentenceBea = SanctuaryL10n.format(
+    singularTemplate,
     locale: locale,
-    gender: userGender,
-    baseAdjective: 'welcome',
+    gender: userBea.gender,
+    number: GrammaticalNumber.singular,
   );
-  print(
-      'Example Usage: ¡$welcomeAdjective, user!'); // Expected: ¡Bienvenida, user!
+  print('For a feminine user ("Bea"): "$sentenceBea"');
+
+  final userCarlos = User('Carlos', GrammaticalGender.masculine);
+  final sentenceCarlos = SanctuaryL10n.format(
+    singularTemplate,
+    locale: locale,
+    gender: userCarlos.gender,
+    number: GrammaticalNumber.singular,
+  );
+  print('For a masculine user ("Carlos"): "$sentenceCarlos"');
+
+  final userAlex = User('Alex', GrammaticalGender.neutral);
+  final sentenceAlex = SanctuaryL10n.format(
+    singularTemplate,
+    locale: locale,
+    gender: userAlex.gender,
+    number: GrammaticalNumber.singular,
+  );
+  print('For a neutral user ("Alex"): "$sentenceAlex"');
+
+  // --- Plural Examples ---
+  print('\n--- Plural Examples ---');
+  final pluralTemplate = '{def_article} {noun:friend} son {adj:happy}.';
+  print('Template: "$pluralTemplate"');
+
+  final pluralFeminine = SanctuaryL10n.format(
+    pluralTemplate,
+    locale: locale,
+    gender: GrammaticalGender.feminine,
+    number: GrammaticalNumber.plural,
+  );
+  print('For a feminine group: "$pluralFeminine"');
+
+  final pluralMasculine = SanctuaryL10n.format(
+    pluralTemplate,
+    locale: locale,
+    gender: GrammaticalGender.masculine,
+    number: GrammaticalNumber.plural,
+  );
+  print('For a masculine group: "$pluralMasculine"');
+
+  final pluralNeutral = SanctuaryL10n.format(
+    pluralTemplate,
+    locale: locale,
+    gender: GrammaticalGender.neutral,
+    number: GrammaticalNumber.plural,
+  );
+  print('For a neutral group: "$pluralNeutral"');
 }

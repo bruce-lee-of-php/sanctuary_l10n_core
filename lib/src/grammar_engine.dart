@@ -1,56 +1,138 @@
-// This file contains the core logic for the grammatical gender engine.
-// It provides helper functions to get correctly inflected words based on
-// the provided locale and gender.
+// This file has been updated to handle plurals. The `format` function
+// now accepts a `number` parameter.
 
 import 'package:sanctuary_l10n_core/src/grammar_rules/spanish_rules.dart';
 import 'package:sanctuary_l10n_core/src/models/grammatical_gender.dart';
+import 'package:sanctuary_l10n_core/src/models/grammatical_number.dart';
 
 /// A static helper class for handling grammatical gender in localization.
-///
-/// This engine provides functions to retrieve correctly inflected words
-/// (like adjectives and nouns) based on the target locale and the desired
-/// grammatical gender.
 class SanctuaryL10n {
-  /// A map that directs to the correct rule set for each supported language.
-  static final Map<String, Map<String, Map<GrammaticalGender, String>>>
-      _ruleSets = {
-    'es': spanishAdjectives,
-    // In the future, other languages will be added here.
-    // 'fr': frenchAdjectives,
+  // --- Rule Set Definitions ---
+  static final Map<String, Map<String, InflectionMap>> _adjectiveRuleSets = {
+    'es': spanishAdjectives
+  };
+  static final Map<String, Map<String, InflectionMap>> _nounRuleSets = {
+    'es': spanishNouns
+  };
+  static final Map<String, InflectionMap> _definiteArticleRuleSets = {
+    'es': spanishDefiniteArticles
+  };
+  static final Map<String, InflectionMap> _indefiniteArticleRuleSets = {
+    'es': spanishIndefiniteArticles
   };
 
-  /// Returns the correctly inflected adjective for the given gender and locale.
-  ///
-  /// This function looks up the [baseAdjective] in the dictionary for the
-  /// specified [locale] and returns the form that matches the [gender].
-  ///
-  /// If the locale is not supported or the adjective is not found, it will
-  /// return the [baseAdjective] as a fallback.
-  ///
-  /// Example:
-  /// ```dart
-  /// getAdjective(
-  ///   locale: 'es',
-  ///   gender: GrammaticalGender.feminine,
-  ///   baseAdjective: 'tired'
-  /// ); // Returns "cansada"
-  /// ```
-  static String getAdjective({
+  // --- NEW: The Intelligent Formatter ---
+  static String format(
+    String template, {
     required String locale,
     required GrammaticalGender gender,
-    required String baseAdjective,
+    GrammaticalNumber number =
+        GrammaticalNumber.singular, // Default to singular
   }) {
-    final languageRules = _ruleSets[locale];
-    if (languageRules == null) {
-      return baseAdjective; // Fallback for unsupported languages
-    }
+    final RegExp placeholderRegex = RegExp(r'\{(.+?)\}');
 
-    final adjectiveForms = languageRules[baseAdjective];
-    if (adjectiveForms == null) {
-      return baseAdjective; // Fallback for unknown adjectives
-    }
+    return template.replaceAllMapped(placeholderRegex, (match) {
+      final placeholder = match.group(1) ?? '';
+      final parts = placeholder.split(':');
+      final type = parts[0];
+      final baseWord = parts.length > 1 ? parts[1] : '';
 
-    return adjectiveForms[gender] ??
-        baseAdjective; // Fallback for missing gender form
+      switch (type) {
+        case 'noun':
+          return getNoun(
+              locale: locale,
+              gender: gender,
+              number: number,
+              baseNoun: baseWord);
+        case 'adj':
+          return getAdjective(
+              locale: locale,
+              gender: gender,
+              number: number,
+              baseAdjective: baseWord);
+        case 'def_article':
+          return getDefiniteArticle(
+              locale: locale, gender: gender, number: number);
+        case 'indef_article':
+          return getIndefiniteArticle(
+              locale: locale, gender: gender, number: number);
+        default:
+          return match.group(0) ?? '';
+      }
+    });
+  }
+
+  // --- Existing Functions (now with `number` parameter) ---
+  static String getAdjective(
+      {required String locale,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number,
+      required String baseAdjective}) {
+    return _getInflectedWord(
+        ruleSet: _adjectiveRuleSets[locale],
+        baseWord: baseAdjective,
+        gender: gender,
+        number: number);
+  }
+
+  static String getNoun(
+      {required String locale,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number,
+      required String baseNoun}) {
+    return _getInflectedWord(
+        ruleSet: _nounRuleSets[locale],
+        baseWord: baseNoun,
+        gender: gender,
+        number: number);
+  }
+
+  static String getDefiniteArticle(
+      {required String locale,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number}) {
+    return _getArticle(
+        ruleSet: _definiteArticleRuleSets[locale],
+        gender: gender,
+        number: number,
+        fallback: 'the');
+  }
+
+  static String getIndefiniteArticle(
+      {required String locale,
+      required GrammaticalGender gender,
+      required GrammaticalNumber number}) {
+    return _getArticle(
+        ruleSet: _indefiniteArticleRuleSets[locale],
+        gender: gender,
+        number: number,
+        fallback: 'a');
+  }
+
+  // --- Private Helper Methods (now with `number` parameter) ---
+  static String _getInflectedWord({
+    required Map<String, InflectionMap>? ruleSet,
+    required String baseWord,
+    required GrammaticalGender gender,
+    required GrammaticalNumber number,
+  }) {
+    if (ruleSet == null) return baseWord;
+    final numberForms = ruleSet[baseWord];
+    if (numberForms == null) return baseWord;
+    final genderForms = numberForms[number];
+    if (genderForms == null) return baseWord;
+    return genderForms[gender] ?? baseWord;
+  }
+
+  static String _getArticle({
+    required Map<GrammaticalNumber, Map<GrammaticalGender, String>>? ruleSet,
+    required GrammaticalGender gender,
+    required GrammaticalNumber number,
+    required String fallback,
+  }) {
+    if (ruleSet == null) return fallback;
+    final genderForms = ruleSet[number];
+    if (genderForms == null) return fallback;
+    return genderForms[gender] ?? fallback;
   }
 }

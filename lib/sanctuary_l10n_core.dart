@@ -5,10 +5,13 @@
 /// grammatical gender engine.
 library sanctuary_l10n_core;
 
-// Export the public-facing models
+// Export the public-facing models of the package.
 export 'src/models/grammatical_gender.dart';
-export 'src/models/pronoun_set.dart'; // <-- Export for PronounSet
+export 'src/models/grammatical_number.dart';
+export 'src/models/pronoun_set.dart';
 
-// Export the public-facing classes
+// Export the new Grammar Engine.
 export 'src/grammar_engine.dart';
-export 'src/vocabulary.dart'; // <-- Export for SanctuaryVocabulary
+
+// Export the new Vocabulary accessor.
+export 'src/vocabulary.dart';
