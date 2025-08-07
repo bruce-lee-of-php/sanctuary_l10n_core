@@ -1,3 +1,4 @@
+```markdown
 # Sanctuary L10n Core 🏳️‍⚧️🏳️‍🌈
 
 A pure Dart localization toolkit for queer and trans communities, making inclusive language the default, not the exception.
@@ -19,19 +20,21 @@ This package saves developers time, reduces errors, and promotes a higher standa
 
 * **Curated Vocabulary:** Access lists of pronouns (`PronounSet`), gender identities, and sexualities.
 * **Random Data Generation:** Easily generate random data for testing and mockups.
-* **Grammar Engine:** Get correctly inflected, gender-affirming adjectives for grammatically gendered languages.
+* **Intelligent String Formatting:** Use template strings to generate grammatically correct, gender-affirming sentences in both singular and plural forms.
 
 ## Getting Started
 
 Add the dependency to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  sanctuary_l10n_core: ^0.2.0 # Or the latest version
+  sanctuary_l10n_core: ^0.3.0 # Or the latest version
 ```
 
 ## Usage
 
-### Accessing Vocabulary
+### 1. Accessing Vocabulary
+
+The `SanctuaryVocabulary` class provides access to the package's curated lists of terms.
 
 ```dart
 import 'package:sanctuary_l10n_core/sanctuary_l10n_core.dart';
@@ -49,36 +52,45 @@ void main() {
 }
 ```
 
-### Using the Grammar Engine
+### 2. Using the Grammar Engine with `format()`
 
-The grammar engine allows you to generate grammatically correct sentences that respect a user's gender.
+The `SanctuaryL10n.format()` function is the most powerful feature of the package. It allows you to generate grammatically correct sentences using a simple template syntax.
+
+**Template Syntax:**
+Placeholders in the template should follow the format `{type:base_word}` or `{type}` for articles.
+* **Nouns:** `{noun:friend}`
+* **Adjectives:** `{adj:happy}`
+* **Articles:** `{def_article}` (for "the") and `{indef_article}` (for "a/an").
+
+**Example:**
 
 ```dart
 import 'package:sanctuary_l10n_core/sanctuary_l10n_core.dart';
 
 void main() {
   final locale = 'es'; // Set the language to Spanish
-  final userGender = GrammaticalGender.feminine;
 
-  final welcomeAdjective = SanctuaryL10n.getAdjective(
+  // --- Singular Example ---
+  final singularTemplate = '{def_article} {noun:developer} está {adj:happy}.';
+  final singularResult = SanctuaryL10n.format(
+    singularTemplate,
     locale: locale,
-    gender: userGender,
-    baseAdjective: 'welcome',
+    gender: GrammaticalGender.feminine,
+    number: GrammaticalNumber.singular,
   );
+  print(singularResult); // Prints: "la desarrolladora está contenta."
 
-  print('¡$welcomeAdjective, user!'); // Prints: "¡Bienvenida, user!"
+  // --- Plural Example ---
+  final pluralTemplate = '{def_article} {noun:friend} son {adj:happy}.';
+  final pluralResult = SanctuaryL10n.format(
+    pluralTemplate,
+    locale: locale,
+    gender: GrammaticalGender.masculine,
+    number: GrammaticalNumber.plural,
+  );
+  print(pluralResult); // Prints: "los amigos son contentos."
 }
 ```
-
-## Roadmap
-
-* **v0.3:** Implement a `build_runner` script to automatically merge the community glossary with user-defined `.arb` files.
-* **v0.4:** Expand the Grammar Engine to support more languages and parts of speech (e.g., nouns).
-* **v1.0:** Stable API and comprehensive documentation.
-
-## Contributing
-
-This is a community-driven project. Please see `CONTRIBUTING.md` for details on how to add new terms, support new languages, or improve the grammar engine.
 
 ---
 
@@ -99,7 +111,7 @@ At its heart, `sanctuary_l10n_core` is a pure Dart library that provides two key
 * **Create Affirming User Experiences:** Use the grammar engine to build personalized, grammatically correct welcome messages and notifications.
 * **Build Backend Tools:** Because it's a pure Dart package, the logic can be used to build tools like inclusive Discord moderation bots.
 
-### What It Can't Do: Current Limitations (v0.1.0)
+### What It Can't Do: Current Limitations
 
 This is an MVP, and it's important to be clear about its current limitations.
 
@@ -107,3 +119,15 @@ This is an MVP, and it's important to be clear about its current limitations.
 * **Grammar Engine is a Proof-of-Concept:** It currently only supports a few adjectives in **Spanish**. More languages and parts of speech will be added in future versions.
 * **Vocabulary is Static:** The lists of terms are hardcoded. The planned feature to automatically merge a developer's own `.arb` files is not yet implemented.
 * **Not Context-Aware:** As a pure Dart package, it cannot access Flutter's `BuildContext`. Developers must manually provide the `locale` to the grammar engine in every call. This will be simplified in the `flutter_sanctuary_ui` companion package.
+
+---
+
+## Roadmap
+
+* **v0.4:** Implement a `build_runner` script to automatically merge the community glossary with user-defined `.arb` files.
+* **v0.5:** Expand the Grammar Engine to support more languages (e.g., French, German) and parts of speech.
+* **v1.0:** Stable API and comprehensive documentation.
+
+## Contributing
+
+This is a community-driven project. Please see `CONTRIBUTING.md` for details on how to add new terms, support new languages, or improve the grammar engine.
