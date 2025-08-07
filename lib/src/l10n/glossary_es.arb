@@ -1,5 +1,22 @@
 {
   "@@locale": "es",
+
+  "sectionTitle_genderIdentity": "Identidad de Género",
+  "@sectionTitle_genderIdentity": {
+    "description": "Título para una sección relacionada con la identidad de género."
+  },
+  "identity_transgender": "Transgénero",
+  "@identity_transgender": {
+    "description": "Un término paraguas para personas cuya identidad de género difiere del sexo que se les asignó al nacer."
+  },
+  "identity_transWoman": "Mujer Trans",
+  "@identity_transWoman": {
+    "description": "Una persona a la que se le asignó el sexo masculino al nacer y cuya identidad de género es femenina."
+  },
+  "identity_transMan": "Hombre Trans",
+  "@identity_transMan": {
+    "description": "Una persona a la que se le asignó el sexo femenino al nacer y cuya identidad de género es masculina."
+  },
   "identity_nonBinary": "No binarie",
   "@identity_nonBinary": {
     "description": "Un término paraguas para identidades de género que no son únicamente masculinas o femeninas."
@@ -8,12 +25,103 @@
   "@identity_genderfluid": {
     "description": "Una identidad de género que varía con el tiempo."
   },
-  "identity_transgender": "Transgénero",
-  "@identity_transgender": {
-    "description": "Un término paraguas para personas cuya identidad de género difiere del sexo que se les asignó al nacer."
+  "identity_genderqueer": "Genderqueer",
+  "@identity_genderqueer": {
+    "description": "Una persona que no se suscribe a las distinciones de género convencionales, sino que se identifica con ninguno, ambos o una combinación de los géneros masculino y femenino."
+  },
+  "identity_agender": "Agénero",
+  "@identity_agender": {
+    "description": "Una persona que no se identifica con ningún género en particular."
+  },
+  "identity_twoSpirit": "Dos Espíritus",
+  "@identity_twoSpirit": {
+    "description": "Un término utilizado por algunos indígenas de América del Norte para describir a las personas nativas de sus comunidades que cumplen un rol ceremonial y social tradicional de tercer género (u otra variante de género) en sus culturas."
+  },
+  "identity_cisgender": "Cisgénero",
+  "@identity_cisgender": {
+    "description": "Una persona cuya identidad de género corresponde con el sexo que se le registró al nacer."
+  },
+
+  "sectionTitle_orientation": "Orientación Sexual y Romántica",
+  "@sectionTitle_orientation": {
+    "description": "Título para una sección relacionada con la orientación sexual y romántica."
+  },
+  "orientation_lesbian": "Lesbiana",
+  "@orientation_lesbian": {
+    "description": "Una mujer que se siente atraída emocional, romántica o sexualmente por otras mujeres."
+  },
+  "orientation_gay": "Gay",
+  "@orientation_gay": {
+    "description": "Una persona que se siente atraída emocional, romántica o sexualmente por miembros de su mismo género. Se usa más comúnmente para hombres."
+  },
+  "orientation_bisexual": "Bisexual",
+  "@orientation_bisexual": {
+    "description": "Una persona que se siente atraída emocional, romántica o sexualmente por más de un sexo, género o identidad de género."
+  },
+  "orientation_pansexual": "Pansexual",
+  "@orientation_pansexual": {
+    "description": "Alguien que tiene el potencial de sentir atracción emocional, romántica o sexual por personas de cualquier género."
+  },
+  "orientation_asexual": "Asexual",
+  "@orientation_asexual": {
+    "description": "Una persona que experimenta poca o ninguna atracción sexual hacia los demás. A menudo se abrevia como 'ace'."
+  },
+  "orientation_aromantic": "Arromántico",
+  "@orientation_aromantic": {
+    "description": "Una persona que experimenta poca o ninguna atracción romántica hacia los demás."
+  },
+  "orientation_queer": "Queer",
+  "@orientation_queer": {
+    "description": "Un término paraguas para las minorías sexuales y de género que no son heterosexuales o cisgénero. Ha sido reapropiado por muchos, pero algunos todavía pueden considerarlo un insulto."
+  },
+  "orientation_straight": "Heterosexual",
+  "@orientation_straight": {
+    "description": "Una persona que se siente atraída emocional, romántica o sexualmente por miembros de un género diferente. También conocido como heterosexual."
+  },
+
+  "sectionTitle_relationships": "Relaciones y Familia",
+  "@sectionTitle_relationships": {
+    "description": "Título para una sección relacionada con las relaciones y las estructuras familiares."
   },
   "relationship_partner": "Pareja",
   "@relationship_partner": {
     "description": "Un término de género neutro para una pareja."
+  },
+  "relationship_qpp": "Pareja Queerplatónica",
+  "@relationship_qpp": {
+    "description": "Una pareja en una relación queerplatónica, que es un tipo de asociación no romántica más intensa e íntima que lo que generalmente se considera una amistad."
+  },
+  "relationship_chosenFamily": "Familia Elegida",
+  "@relationship_chosenFamily": {
+    "description": "Un grupo de personas a las que uno se siente emocionalmente cercano y considera familia, aunque no estén relacionadas biológica o legalmente."
+  },
+
+  "sectionTitle_community": "Términos Comunitarios y Culturales",
+  "@sectionTitle_community": {
+    "description": "Título para una sección relacionada con la terminología comunitaria y cultural."
+  },
+  "community_ally": "Aliade",
+  "@community_ally": {
+    "description": "Una persona que no es miembro de un grupo marginado pero que toma medidas para apoyar a ese grupo."
+  },
+  "community_bipoc": "BIPOC",
+  "@community_bipoc": {
+    "description": "Un acrónimo para personas Negras, Indígenas y de Color (del inglés: Black, Indigenous, and People of Color)."
+  },
+  "community_qtpoc": "QTPOC",
+  "@community_qtpoc": {
+    "description": "Un acrónimo para personas Queer y Trans de Color (del inglés: Queer and Trans People of Color)."
+  },
+  "community_latinx": "Latinx",
+  "@community_latinx": {
+    "description": "Un término de género neutro para personas de identidad cultural o étnica latinoamericana en los Estados Unidos. El uso y la aceptación de este término varían."
+  },
+  "community_deadname": "Deadname",
+  "@community_deadname": {
+    "description": "El nombre de nacimiento de una persona transgénero que ha cambiado su nombre como parte de su transición de género. Usar este nombre suele ser hiriente."
+  },
+  "community_misgendering": "Malgenerizar",
+  "@community_misgendering": {
+    "description": "El acto de referirse a alguien usando una palabra, especialmente un pronombre o forma de tratamiento, que no refleja correctamente el género con el que se identifica."
   }
 }

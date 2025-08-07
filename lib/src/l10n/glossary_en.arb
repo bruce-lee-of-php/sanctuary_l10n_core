@@ -1,5 +1,22 @@
 {
   "@@locale": "en",
+
+  "sectionTitle_genderIdentity": "Gender Identity",
+  "@sectionTitle_genderIdentity": {
+    "description": "Title for a section related to gender identity."
+  },
+  "identity_transgender": "Transgender",
+  "@identity_transgender": {
+    "description": "An umbrella term for people whose gender identity differs from the sex they were assigned at birth."
+  },
+  "identity_transWoman": "Trans Woman",
+  "@identity_transWoman": {
+    "description": "A person who was assigned male at birth and whose gender identity is female."
+  },
+  "identity_transMan": "Trans Man",
+  "@identity_transMan": {
+    "description": "A person who was assigned female at birth and whose gender identity is male."
+  },
   "identity_nonBinary": "Non-binary",
   "@identity_nonBinary": {
     "description": "An umbrella term for gender identities that are not solely male or female."
@@ -8,12 +25,103 @@
   "@identity_genderfluid": {
     "description": "A gender identity which varies over time."
   },
-  "identity_transgender": "Transgender",
-  "@identity_transgender": {
-    "description": "An umbrella term for people whose gender identity differs from the sex they were assigned at birth."
+  "identity_genderqueer": "Genderqueer",
+  "@identity_genderqueer": {
+    "description": "A person who does not subscribe to conventional gender distinctions but identifies with neither, both, or a combination of male and female genders."
+  },
+  "identity_agender": "Agender",
+  "@identity_agender": {
+    "description": "A person who does not identify with any particular gender."
+  },
+  "identity_twoSpirit": "Two-Spirit",
+  "@identity_twoSpirit": {
+    "description": "A term used by some Indigenous North Americans to describe Native people in their communities who fulfill a traditional third-gender (or other gender-variant) ceremonial and social role in their cultures."
+  },
+  "identity_cisgender": "Cisgender",
+  "@identity_cisgender": {
+    "description": "A person whose gender identity corresponds with the sex registered for them at birth."
+  },
+
+  "sectionTitle_orientation": "Sexual & Romantic Orientation",
+  "@sectionTitle_orientation": {
+    "description": "Title for a section related to sexual and romantic orientation."
+  },
+  "orientation_lesbian": "Lesbian",
+  "@orientation_lesbian": {
+    "description": "A woman who is emotionally, romantically, or sexually attracted to other women."
+  },
+  "orientation_gay": "Gay",
+  "@orientation_gay": {
+    "description": "A person who is emotionally, romantically, or sexually attracted to members of the same gender. Most commonly used for men."
+  },
+  "orientation_bisexual": "Bisexual",
+  "@orientation_bisexual": {
+    "description": "A person emotionally, romantically, or sexually attracted to more than one sex, gender, or gender identity."
+  },
+  "orientation_pansexual": "Pansexual",
+  "@orientation_pansexual": {
+    "description": "Someone who has the potential for emotional, romantic, or sexual attraction to people of any gender."
+  },
+  "orientation_asexual": "Asexual",
+  "@orientation_asexual": {
+    "description": "A person who experiences little or no sexual attraction to others. Often shortened to 'ace'."
+  },
+  "orientation_aromantic": "Aromantic",
+  "@orientation_aromantic": {
+    "description": "A person who experiences little or no romantic attraction to others."
+  },
+  "orientation_queer": "Queer",
+  "@orientation_queer": {
+    "description": "An umbrella term for sexual and gender minorities who are not heterosexual or are not cisgender. Has been reclaimed by many but can still be considered a slur by some."
+  },
+  "orientation_straight": "Straight",
+  "@orientation_straight": {
+    "description": "A person who is emotionally, romantically, or sexually attracted to members of a different gender. Also known as heterosexual."
+  },
+
+  "sectionTitle_relationships": "Relationships & Family",
+  "@sectionTitle_relationships": {
+    "description": "Title for a section related to relationships and family structures."
   },
   "relationship_partner": "Partner",
   "@relationship_partner": {
     "description": "A gender-neutral term for a significant other."
+  },
+  "relationship_qpp": "Queerplatonic Partner",
+  "@relationship_qpp": {
+    "description": "A partner in a queerplatonic relationship, which is a type of non-romantic partnership that is more intense and intimate than what is generally considered a friendship."
+  },
+  "relationship_chosenFamily": "Chosen Family",
+  "@relationship_chosenFamily": {
+    "description": "A group of people to whom one is emotionally close and considers family, even though they are not biologically or legally related."
+  },
+
+  "sectionTitle_community": "Community & Cultural Terms",
+  "@sectionTitle_community": {
+    "description": "Title for a section related to community and cultural terminology."
+  },
+  "community_ally": "Ally",
+  "@community_ally": {
+    "description": "A person who is not a member of a marginalized group but who takes action to support that group."
+  },
+  "community_bipoc": "BIPOC",
+  "@community_bipoc": {
+    "description": "An acronym for Black, Indigenous, and People of Color."
+  },
+  "community_qtpoc": "QTPOC",
+  "@community_qtpoc": {
+    "description": "An acronym for Queer and Trans People of Color."
+  },
+  "community_latinx": "Latinx",
+  "@community_latinx": {
+    "description": "A gender-neutral term for people of Latin American cultural or ethnic identity in the United States. Usage and acceptance of this term varies."
+  },
+  "community_deadname": "Deadname",
+  "@community_deadname": {
+    "description": "The birth name of a transgender person who has changed their name as part of their gender transition. Using this name is often hurtful."
+  },
+  "community_misgendering": "Misgendering",
+  "@community_misgendering": {
+    "description": "The act of referring to someone using a word, especially a pronoun or form of address, that does not correctly reflect the gender with which they identify."
   }
 }
