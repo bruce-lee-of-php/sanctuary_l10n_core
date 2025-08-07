@@ -30,3 +30,15 @@
     * Added `GrammaticalNumber` enum (`singular`, `plural`).
     * The `format()` function now accepts a `number` parameter.
     * Updated all internal rule sets to include plural inflections.
+
+## 0.4.0
+
+* **Major Feature: Verb Conjugation Engine**
+    * The `SanctuaryL10n.format()` function can now conjugate verbs based on pronoun context.
+    * Added a new `{verb:base_verb:tense}` placeholder to the template syntax.
+    * The `PronounSet` model was upgraded with a `conjugationKey` to handle irregular verbs and special cases like the singular "they".
+* **Vertical Expansion (English):**
+    * Added a new rule set for irregular English verbs, starting with "to be" and "to have".
+* **API Improvement:**
+    * The `format()` function can now infer `GrammaticalGender` from a provided `PronounSet`, simplifying its use.
+    * Added `defaultGender` to the `PronounSet` model.

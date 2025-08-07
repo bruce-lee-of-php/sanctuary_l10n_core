@@ -1,4 +1,3 @@
-```markdown
 # Sanctuary L10n Core 🏳️‍⚧️🏳️‍🌈
 
 A pure Dart localization toolkit for queer and trans communities, making inclusive language the default, not the exception.
@@ -27,7 +26,7 @@ This package saves developers time, reduces errors, and promotes a higher standa
 Add the dependency to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  sanctuary_l10n_core: ^0.3.0 # Or the latest version
+  sanctuary_l10n_core: ^0.4.0 # Or the latest version
 ```
 
 ## Usage
@@ -60,6 +59,7 @@ The `SanctuaryL10n.format()` function is the most powerful feature of the packag
 Placeholders in the template should follow the format `{type:base_word}` or `{type}` for articles.
 * **Nouns:** `{noun:friend}`
 * **Adjectives:** `{adj:happy}`
+* **Verbs:** `{verb:be:present}`
 * **Articles:** `{def_article}` (for "the") and `{indef_article}` (for "a/an").
 
 **Example:**
@@ -98,34 +98,29 @@ void main() {
 
 ### What It Does: Core Functionality
 
-At its heart, `sanctuary_l10n_core` is a pure Dart library that provides two key pieces of functionality: a **curated vocabulary** and a **basic grammar engine**.
+At its heart, `sanctuary_l10n_core` is a pure Dart library that provides a **curated vocabulary** and a **grammar engine**.
 
-* **The Vocabulary (`SanctuaryVocabulary`):** A read-only database of community-vetted, inclusive terminology. It provides structured `PronounSet` objects (containing all 5 grammatical forms), simple `List<String>` collections for gender identities and sexualities, and helper functions for random data generation.
+* **The Vocabulary (`SanctuaryVocabulary`):** A read-only database of community-vetted, inclusive terminology. It provides structured `PronounSet` objects (containing all grammatical forms), simple `List<String>` collections for gender identities and sexualities, and helper functions for random data generation.
 
-* **The Grammar Engine (`SanctuaryL10n`):** The logic engine for handling grammatically gendered languages. It provides a `GrammaticalGender` enum and a `getAdjective()` function that returns a correctly inflected word based on a given locale, gender, and base adjective.
+* **The Grammar Engine (`SanctuaryL10n`):** The logic engine for handling grammatically gendered languages. It provides a `GrammaticalGender` enum and a powerful `format()` function that returns correctly inflected sentences based on a given locale, gender, number, and pronoun context.
 
-### What You Can Do With It: Practical Use Cases
+### What It Can't Do: Current Limitations & Edge Cases
 
-* **Populate UI Components:** Use the vocabulary lists to easily populate pronoun selectors or identity tags.
-* **Generate Realistic Test Data:** Power a package like `queer_faker` to create diverse and realistic user profiles for testing.
-* **Create Affirming User Experiences:** Use the grammar engine to build personalized, grammatically correct welcome messages and notifications.
-* **Build Backend Tools:** Because it's a pure Dart package, the logic can be used to build tools like inclusive Discord moderation bots.
-
-### What It Can't Do: Current Limitations
-
-This is an MVP, and it's important to be clear about its current limitations.
+This package is a powerful tool, but it is not a full natural language processing engine. It's important to understand its current limitations.
 
 * **No UI:** This package contains **zero** Flutter widgets. The UI toolkit will be a separate package (`flutter_sanctuary_ui`).
-* **Grammar Engine is a Proof-of-Concept:** It currently only supports a few adjectives in **Spanish**. More languages and parts of speech will be added in future versions.
+* **Grammar Engine is a Proof-of-Concept:** It currently only supports a limited set of words in **Spanish** (for gendered nouns/adjectives) and **English** (for verb conjugations). More languages and words will be added in future versions.
+* **Handling Combined Pronouns (e.g., 'she/they'):** A person's pronouns describe who they are. Our `PronounSet` model cannot represent multiple pronouns in a single object. The responsibility for handling this lies with the app developer, but our package provides the necessary tools.
+    * **Recommendation:** The app should store a `List<PronounSet>` for the user. The developer can then decide which pronoun to use in which context (e.g., alternating). To ensure correct grammar, they can use the `gender` override in the `format()` function. For example, to use "they" with feminine grammar: `SanctuaryL10n.format(template, pronoun: pronounThey, gender: GrammaticalGender.feminine)`.
+* **Adjective/Noun Agreement:** The engine currently genders adjectives based on the **subject's gender**, not the gender of the noun they are describing. For now, only use the engine for adjectives that describe the user directly.
 * **Vocabulary is Static:** The lists of terms are hardcoded. The planned feature to automatically merge a developer's own `.arb` files is not yet implemented.
-* **Not Context-Aware:** As a pure Dart package, it cannot access Flutter's `BuildContext`. Developers must manually provide the `locale` to the grammar engine in every call. This will be simplified in the `flutter_sanctuary_ui` companion package.
 
 ---
 
 ## Roadmap
 
-* **v0.4:** Implement a `build_runner` script to automatically merge the community glossary with user-defined `.arb` files.
-* **v0.5:** Expand the Grammar Engine to support more languages (e.g., French, German) and parts of speech.
+* **v0.6:** Implement a `build_runner` script to automatically merge the community glossary with user-defined `.arb` files.
+* **v0.8:** Expand the Grammar Engine to support more languages (e.g., French, German) and parts of speech.
 * **v1.0:** Stable API and comprehensive documentation.
 
 ## Contributing
