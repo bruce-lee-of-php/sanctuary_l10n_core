@@ -7,24 +7,24 @@ import '../models/pronoun_set.dart';
 // --- PRONOUNS ---
 
 const List<PronounSet> allPronouns = [
-  PronounSet(
-    subjective: 'I',
-    objective: 'me',
-    possessiveAdjective: 'my',
-    possessivePronoun: 'mine',
-    reflexive: 'myself',
-    conjugationKey: '1st-person-singular',
-    defaultGender: GrammaticalGender.neutral, // "I" doesn't imply gender
-  ),
-  PronounSet(
-    subjective: 'you',
-    objective: 'you',
-    possessiveAdjective: 'your',
-    possessivePronoun: 'yours',
-    reflexive: 'yourself',
-    conjugationKey: 'plural',
-    defaultGender: GrammaticalGender.neutral,
-  ),
+  // PronounSet(
+  //   subjective: 'I',
+  //   objective: 'me',
+  //   possessiveAdjective: 'my',
+  //   possessivePronoun: 'mine',
+  //   reflexive: 'myself',
+  //   conjugationKey: '1st-person-singular',
+  //   defaultGender: GrammaticalGender.neutral, // "I" doesn't imply gender
+  // ),
+  // PronounSet(
+  //   subjective: 'you',
+  //   objective: 'you',
+  //   possessiveAdjective: 'your',
+  //   possessivePronoun: 'yours',
+  //   reflexive: 'yourself',
+  //   conjugationKey: 'plural',
+  //   defaultGender: GrammaticalGender.neutral,
+  // ),
   PronounSet(
     subjective: 'she',
     objective: 'her',
@@ -52,15 +52,15 @@ const List<PronounSet> allPronouns = [
     conjugationKey: '3rd-person-plural',
     defaultGender: GrammaticalGender.neutral, // "they" implies neutral
   ),
-  PronounSet(
-    subjective: 'we',
-    objective: 'us',
-    possessiveAdjective: 'our',
-    possessivePronoun: 'ours',
-    reflexive: 'ourselves',
-    conjugationKey: 'plural',
-    defaultGender: GrammaticalGender.neutral,
-  ),
+  // PronounSet(
+  //   subjective: 'we',
+  //   objective: 'us',
+  //   possessiveAdjective: 'our',
+  //   possessivePronoun: 'ours',
+  //   reflexive: 'ourselves',
+  //   conjugationKey: 'plural',
+  //   defaultGender: GrammaticalGender.neutral,
+  // ),
   PronounSet(
     subjective: 'ze',
     objective: 'zir',
