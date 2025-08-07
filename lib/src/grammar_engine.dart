@@ -48,30 +48,36 @@ class SanctuaryL10n {
         case 'adj':
         case 'def_article':
         case 'indef_article':
-          if (currentGender == null)
+          if (currentGender == null) {
             return baseWord; // Cannot inflect without a gender
-          if (type == 'noun')
+          }
+          if (type == 'noun') {
             return getNoun(
                 locale: locale,
                 gender: currentGender,
                 number: number,
                 baseNoun: baseWord);
-          if (type == 'adj')
+          }
+          if (type == 'adj') {
             return getAdjective(
                 locale: locale,
                 gender: currentGender,
                 number: number,
                 baseAdjective: baseWord);
-          if (type == 'def_article')
+          }
+          if (type == 'def_article') {
             return getDefiniteArticle(
                 locale: locale, gender: currentGender, number: number);
-          if (type == 'indef_article')
+          }
+          if (type == 'indef_article') {
             return getIndefiniteArticle(
                 locale: locale, gender: currentGender, number: number);
+          }
           break;
         case 'verb':
-          if (pronoun == null)
+          if (pronoun == null) {
             return baseWord; // Cannot conjugate without a pronoun
+          }
           return getVerb(
               locale: locale,
               pronoun: pronoun,
